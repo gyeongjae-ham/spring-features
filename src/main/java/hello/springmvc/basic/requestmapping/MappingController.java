@@ -112,7 +112,7 @@ public class MappingController {
      * produces = "*\/*"
      */
     // 클라이언트 입장에서 받아들일 수 있는 Accept 타입과 내가 생산하는 타입이 일치할 경우에만 응답
-    @PostMapping(value = "/mapping-produces", produces = "text/html")
+    @PostMapping(value = "/mapping-produces", produces = MediaType.TEXT_HTML_VALUE)
     public String mappingProduces() {
         log.info("mappingProduces");
         return "ok";
