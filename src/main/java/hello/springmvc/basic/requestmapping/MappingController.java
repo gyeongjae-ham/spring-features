@@ -2,6 +2,7 @@ package hello.springmvc.basic.requestmapping;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -97,7 +98,7 @@ public class MappingController {
      * MediaType.APPLICATION_JSON_VALUE
      */
     // request 오는 미디어 타입의 조건을 지정할 수 있다
-    @PostMapping(value = "/mapping-consume", consumes = "application/json")
+    @PostMapping(value = "/mapping-consume", consumes = MediaType.APPLICATION_JSON_VALUE)
     public String mappingConsumes() {
         log.info("mappingConsumes");
         return "ok";
