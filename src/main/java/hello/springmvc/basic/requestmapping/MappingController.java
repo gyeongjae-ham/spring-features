@@ -43,9 +43,9 @@ public class MappingController {
      * /mappping/userA
      * 최근 많이 사용하고 있는 방식
      */
-    @GetMapping("/mapping/{userId")
-    public String mappingPath(@PathVariable("userId") String data) {
-        log.info("mappingPath userId={}", data);
+    @GetMapping("/mapping/{userId}")
+    public String mappingPath(@PathVariable String userId) {
+        log.info("mappingPath userId={}", userId);
         return "ok";
     }
 }
