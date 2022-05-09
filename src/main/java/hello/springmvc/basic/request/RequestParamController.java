@@ -23,12 +23,10 @@ public class RequestParamController {
         response.getWriter().write("ok");
     }
 
-    @ResponseBody // 원래 Controller 안에서 String 반환이면 view를 찾게되므로, ResponseBody 애노테이션을 넣어주면 반환 String을 그대로 http 응답 메시지에 넣어준다
+    @ResponseBody
+    // 원래 Controller 안에서 String 반환이면 view를 찾게되므로, ResponseBody 애노테이션을 넣어주면 반환 String을 그대로 http 응답 메시지에 넣어준다
     @RequestMapping("/request-param-v2")
-    public String requestParamV2(
-            @RequestParam("username") String memberName,
-            @RequestParam("age") int memberAge
-    ) {
+    public String requestParamV2(@RequestParam("username") String memberName, @RequestParam("age") int memberAge) {
         log.info("username={}, age={}", memberName, memberAge);
         return "ok";
     }
@@ -36,10 +34,7 @@ public class RequestParamController {
     @ResponseBody
     @RequestMapping("/request-param-v3")
     // query parameter 변수명이랑 같은 이름이면 ("username") 이 부분 생략 가능하다
-    public String requestParamV3(
-            @RequestParam String username,
-            @RequestParam int age
-    ) {
+    public String requestParamV3(@RequestParam String username, @RequestParam int age) {
         log.info("username={}, age={}", username, age);
         return "ok";
     }
@@ -48,6 +43,27 @@ public class RequestParamController {
     @RequestMapping("/request-param-v4")
     // query parameter 변수명이랑 같은 이름이면 @RequestParam 부분 전체 생략 가능하다
     public String requestParamV4(String username, int age) {
+        log.info("username={}, age={}", username, age);
+        return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/request-param-required")
+    // 기본형인 int 값은 null을 받을 수 없다 Integer로 받아야 한다
+    public String requestParamRequired(
+            @RequestParam(required = true) String username,
+            @RequestParam(required = true) int age) {
+
+        log.info("username={}, age={}", username, age);
+        return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/request-param-default")
+    public String requestParamDefault(
+            @RequestParam(required = true, defaultValue = "guest") String username,
+            @RequestParam(required = true, defaultValue = "-1") int age) {
+
         log.info("username={}, age={}", username, age);
         return "ok";
     }
