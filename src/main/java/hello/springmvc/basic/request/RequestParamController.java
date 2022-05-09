@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -60,11 +61,20 @@ public class RequestParamController {
 
     @ResponseBody
     @RequestMapping("/request-param-default")
+    // 빈 문자의 경우에도 default 적용해준다
     public String requestParamDefault(
             @RequestParam(required = true, defaultValue = "guest") String username,
             @RequestParam(required = true, defaultValue = "-1") int age) {
 
         log.info("username={}, age={}", username, age);
+        return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/request-param-map")
+    // parameter를 Map, MultiValueMap으로 조회할 수 있다
+    public String requestParamMap(@RequestParam Map<String, Object> paramMap) {
+        log.info("username={}, age={}", paramMap.get("username"), paramMap.get("age"));
         return "ok";
     }
 }
