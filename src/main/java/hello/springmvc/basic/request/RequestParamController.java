@@ -3,6 +3,8 @@ package hello.springmvc.basic.request;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,5 +21,15 @@ public class RequestParamController {
         log.info("username={}, age={}", username, age);
 
         response.getWriter().write("ok");
+    }
+
+    @ResponseBody // 원래 Controller 안에서 String 반환이면 view를 찾게되므로, ResponseBody 애노테이션을 넣어주면 반환 String을 그대로 http 응답 메시지에 넣어준다
+    @RequestMapping("/request-param-v2")
+    public String requestParamV2(
+            @RequestParam("username") String memberName,
+            @RequestParam("age") int memberAge
+    ) {
+        log.info("username={}, age={}", memberName, memberAge);
+        return "ok";
     }
 }
