@@ -43,4 +43,12 @@ public class RequestParamController {
         log.info("username={}, age={}", username, age);
         return "ok";
     }
+
+    @ResponseBody
+    @RequestMapping("/request-param-v4")
+    // query parameter 변수명이랑 같은 이름이면 @RequestParam 부분 전체 생략 가능하다
+    public String requestParamV4(String username, int age) {
+        log.info("username={}, age={}", username, age);
+        return "ok";
+    }
 }
