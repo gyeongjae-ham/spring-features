@@ -91,4 +91,16 @@ public class RequestParamController {
 
         return "ok";
     }
+
+    @ResponseBody
+    @RequestMapping("/model-attribute-v2")
+    public String modelAttributeV2(HelloData helloData) { // @ModelAttribute 생략가능하다!!!!!!
+        // 그럼 spring은 생략되어 있으면 뭘 기준으로 판단하냐?
+        // String, int, Integer 같은 단순 타입 = @RequestParam
+        // 그 외의 나머지는 @ModelAttribute(argument resolver로 지정해 둔 타입 제외)
+        log.info("username={}, age={}", helloData.getUsername(), helloData.getAge());
+        log.info("helloData={}", helloData);
+
+        return "ok";
+    }
 }
