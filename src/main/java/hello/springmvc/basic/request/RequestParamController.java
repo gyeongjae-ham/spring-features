@@ -1,7 +1,9 @@
 package hello.springmvc.basic.request;
 
+import hello.springmvc.basic.HelloData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -75,6 +77,18 @@ public class RequestParamController {
     // parameter를 Map, MultiValueMap으로 조회할 수 있다
     public String requestParamMap(@RequestParam Map<String, Object> paramMap) {
         log.info("username={}, age={}", paramMap.get("username"), paramMap.get("age"));
+        return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/model-attribute-v1")
+    public String modelAttributeV1(@ModelAttribute HelloData helloData) { // 이렇게 돌려도 모델 객체를 생성하고 파라미터 값도 모두 들어가 있다!!
+        // 모델의 파라미터 타입과 다른 요청이 들어오면 binding exception이 발생한다
+        // 검증 처리 로직을 구현해줘야 한다
+        // 검증과 예외 처리 과정이 controller에서 빡센 과정이다..;;
+        log.info("username={}, age={}", helloData.getUsername(), helloData.getAge());
+        log.info("helloData={}", helloData); // @Data lombok에 toString 있어서 예쁘게 만들어 준다
+
         return "ok";
     }
 }
