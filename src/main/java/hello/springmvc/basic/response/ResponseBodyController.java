@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,6 +42,7 @@ public class ResponseBodyController {
         return new ResponseEntity<>(helloData, HttpStatus.OK);
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     @GetMapping("/response-body-json-v2")
     public HelloData responseBodyJsonV2() {
@@ -48,6 +50,6 @@ public class ResponseBodyController {
         helloData.setUsername("userA");
         helloData.setAge(20);
 
-        return helloData;
+        return helloData; // 상태코드를 내가 컨트롤 하지 못한다는 단점이 있어서 annotation 지원
     }
 }
