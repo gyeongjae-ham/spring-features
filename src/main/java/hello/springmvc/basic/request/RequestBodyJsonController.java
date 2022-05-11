@@ -50,7 +50,7 @@ public class RequestBodyJsonController {
 
     @ResponseBody
     @PostMapping("/request-body-json-v3")
-    public String requestBodyJsonV3(@RequestBody HelloData helloData) {
+    public String requestBodyJsonV3(@RequestBody HelloData helloData) { // @RequestBody는 생략하면 안된다, 생략하면 ModelAttribute가 붙기 때문에!!
         log.info("username={}, age={}", helloData.getUsername(), helloData.getAge());
         return "ok";
     }
