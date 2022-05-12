@@ -31,3 +31,10 @@
 - `ResponseEntity`
     - HTTP 상태 코드 설정 가능, 응답에서 사용
     - `return new ResponseEntity<String>("Hello World", responseHeaders, HttpStatus.CREATED)`
+
+#### HTTP 메시지 컨버터
+
+- `RequestMapping 핸들러`가 `Controller 핸들러`를 호출하기 전에 `ArgumentResolver`를 호출해서 해당 매개변수를 처리할 수 있는 객체를 생성하도록 한다
+- `ArgumentResolver`가 `HTTP 메시지 컨버터`를 사용해서 객체를 생성한다
+- 응답의 경우에는 `ResponseBody`와 `HttpEntity`를 처리하는 `ReturnValueHandler`가 있고, `ReturnValueHandler`가 `HTTP 메시지 컨버터`를 호출해서 응답
+  결과를 만든다.
